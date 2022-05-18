@@ -30,14 +30,14 @@ stack_t *new_node(int n)
  * Return: void
  */
 
-void free_dlistint(stack_t *stack)
+void free_dlistint(stack_t **stack)
 {
 	stack_t *temp;
 
-	while (stack)
+	while (*stack)
 	{
-		temp = stack;
-		stack = stack->next;
+		temp = (*stack);
+		(*stack) = temp->prev;
 		free(temp);
 	}
 }
