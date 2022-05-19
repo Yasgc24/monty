@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-int global_number;
+extern int global_number;
 
 #define DELIM " \t\r\a\n"
 
@@ -54,7 +54,7 @@ void _nop(stack_t **stack, unsigned int line_number);
 
 int main( int argc, char **argv);
 void read_file(char *argv);
-int (*_getfunc)(stack_t **stack, unsigned int line_number, char *token, char *arg);
+int _getfunc(stack_t **stack, char *arguments,char *token, int line_number);
 void free_dlistint(stack_t **stack);
 int _isdigit(char *c);
 

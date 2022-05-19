@@ -2,11 +2,14 @@
 
 /**
  * _getfunc - select the function
- * @ltoken: line from the bytecode
+ * @stack: stack
+ * @arguments: arguments
+ * @token: tokens
+ * @line_number: line command
  * Return: pointer to the selected function or NULL if failure
  */
 
-int (*_getfunc)(stack_t **stack, char *arguments, char *token, unsigned int line_number)
+int _getfunc(stack_t **stack, char *arguments, char *token, int line_number)
 {
 	instruction_t array_funct[] = {
 		{"push", _push},
@@ -23,20 +26,20 @@ int (*_getfunc)(stack_t **stack, char *arguments, char *token, unsigned int line
 
 	for (i = 0; array_funct[i].opcode; i++)
 	{
-		if (strcmp(array_funct[i].opcode, arg) == NULL)
+		if (!strcmp(array_funct[i].opcode, arguments))
 		{
-			if (strcmp(arg, "push"))
+			if (!strcmp(arguments, "push"))
 			{
-				if (isdigit(token) == 1)
+				if (_isdigit(token) == 1)
 					global_number = atoi(token);
 				else
 					return (1);
 			}
-			array_funct[i].f(stack, line_number);
+			array_funct[i].f(stack, (unsigned int)line_number);
 			break;
 		}
-		if (array_funct[i].opcode == NULL)
-			return (2);
 	}
+	if (array_funct[i].opcode == NULL)
+		return (2);
 	return (0);
 }

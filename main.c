@@ -30,7 +30,7 @@ int main( int argc, char **argv)
 void read_file(char *argv)
 {
 	FILE *fd;
-	char *line, *token, *arguments;
+	char *line, *token =  NULL, *arguments = NULL;
 	stack_t *stack = NULL;
 	unsigned int line_number = 0, res = 0;
 	size_t buff = 0;
