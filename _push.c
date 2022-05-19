@@ -1,5 +1,7 @@
 #include "monty.h"
 
+int global_number;
+
 /**
  * _push - pushes an element to the stack
  * @stack: Stack

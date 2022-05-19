@@ -26,7 +26,7 @@ int _getfunc(stack_t **stack, char *arguments, char *token, int line_number)
 
 	for (i = 0; array_funct[i].opcode; i++)
 	{
-		if (!strcmp(array_funct[i].opcode, arguments))
+		if (!strcmp(arguments, array_funct[i].opcode))
 		{
 			if (!strcmp(arguments, "push"))
 			{
@@ -39,7 +39,7 @@ int _getfunc(stack_t **stack, char *arguments, char *token, int line_number)
 			break;
 		}
 	}
-	if (array_funct[i].opcode == NULL)
+	if (!array_funct[i].opcode)
 		return (2);
 	return (0);
 }
