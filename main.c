@@ -40,29 +40,28 @@ void read_file(char *argv)
 	{
 		while (getline(&line, &buff, fd) != -1)
 		{
-			arguments = strtok(line, " \n\a\t\r");
-			if (arguments)
-			{
-				if (arguments[0] == '#')
-				{
-					line_number++;
-					continue;
-				}
-				token = strtok(NULL, " \n\a\t\r");
-				res = _getfunc(&stack, arguments, token, line_number);
-				if (res == 1)
-				{	fprintf(stderr, "L%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE); }
-			}
 			line_number++;
-		}
-		if (res == 2)
-		{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-			exit(EXIT_FAILURE);}}
-	free(line);
-	free_dlistint(&stack);
-	fclose(fd);
-}
+			arguments = strtok(line, " \t\n\a\r");
+			if (arguments == NULL)
+			{
+				free(arguments);
+				continue;
+			}
+			else if (*arguments == '#')
+				continue;
+			token = strtok(NULL, " \n\a\t\r");
+			res = _getfunc(&stack, arguments, token, line_number);
+			if (res == 1)
+			{	fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			if (res == 2)
+			{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+				exit(EXIT_FAILURE);}}
+		free(line);
+		free_dlistint(&stack);
+		fclose(fd);
+	}
 	else
 	{
 		fprintf(stderr, "Error: Can't open file <file>\n");
