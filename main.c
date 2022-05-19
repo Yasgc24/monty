@@ -57,7 +57,7 @@ void read_file(char *argv)
 			}
 			if (res == 2)
 			{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-				exit(EXIT_FAILURE);}}
+				exit(EXIT_FAILURE); }}
 		free(line);
 		free_dlistint(&stack);
 		fclose(fd);

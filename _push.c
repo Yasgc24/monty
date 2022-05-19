@@ -1,7 +1,5 @@
 #include "monty.h"
 
-int val;
-
 /**
  * _push - pushes an element to the stack
  * @stack: Stack

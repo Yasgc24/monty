@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-extern int val;
+extern int global_number;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -50,9 +50,9 @@ void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
 
-int main( int argc, char **argv);
+int main(int argc, char **argv);
 void read_file(char *argv);
-int _getfunc(stack_t **stack, char *arguments,char *token, int line_number);
+int _getfunc(stack_t **stack, char *arguments, char *token, int line_number);
 void free_dlistint(stack_t **stack);
 int _isdigit(char *c);
 
