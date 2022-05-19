@@ -6,7 +6,7 @@
  * Return: pointer to the selected function or NULL if failure
  */
 
-void (*_getfunc(char **ltoken))(stack_t **stack, unsigned int line_number)
+int (*_getfunc)(stack_t **stack, char *arguments, char *token, unsigned int line_number)
 {
 	instruction_t array_funct[] = {
 		{"push", _push},
@@ -18,16 +18,25 @@ void (*_getfunc(char **ltoken))(stack_t **stack, unsigned int line_number)
 		{"nop", _nop},
 		{NULL, NULL}
 	};
-	int i, cod = 7;
 
-	for (i = 0; i < cod; i++);
+	int i;
+
+	for (i = 0; array_funct[i].opcode; i++)
 	{
-		if (strcmp(array_funct[i].opcode, ltoken) == 0)
+		if (strcmp(array_funct[i].opcode, arg) == NULL)
 		{
-			return (array_funct[i].f(stack, line_number);
+			if (strcmp(arg, "push"))
+			{
+				if (isdigit(token) == 1)
+					global_number = atoi(token);
+				else
+					return (1);
+			}
+			array_funct[i].f(stack, line_number);
+			break;
 		}
+		if (array_funct[i].opcode == NULL)
+			return (2);
 	}
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, ltoken);
-	exit(EXIT_FAILURE);
+	return (0);
 }
-

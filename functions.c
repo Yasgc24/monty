@@ -1,28 +1,4 @@
-#include "main.h"
-
-/**
- * new_node - Create new node
- * @n: data for the new node
- * Return: new node
- */
-
-stack_t *new_node(int n)
-{
-	stack_t *new_node = (stack_t *)malloc(sizeof(stack_t));
-
-	if (new_node == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-	new_node->n = n;
-	new_node->next = NULL;
-	new_node->prev = NULL;
-
-	return (new_node);
-}
-
-#include "lists.h"
+#include "monty.h"
 
 /**
  * free_dlistint -  frees a dlistint_t list
@@ -42,3 +18,25 @@ void free_dlistint(stack_t **stack)
 	}
 }
 
+/**
+* _isdigit - checks a digit
+* @c: character
+* Return: 0
+*/
+
+int _isdigit(char *c)
+{
+	char *temp = c;
+
+	if (c == NULL)
+		return (0);
+	if (*temp == '-')
+		temp++;
+	while (*temp != '\0')
+	{
+		if (*temp >= '0' || *temp <= '9')
+			return (1);
+	}
+	temp++;
+	return (0);
+}

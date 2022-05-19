@@ -12,7 +12,7 @@
 
 int global_number;
 
-#define DELIM " \t\r\a\n:="
+#define DELIM " \t\r\a\n"
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -51,5 +51,11 @@ void _pop(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _nop(stack_t **stack, unsigned int line_number);
+
+int main( int argc, char **argv);
+void read_file(char *argv);
+int (*_getfunc)(stack_t **stack, unsigned int line_number, char *token, char *arg);
+void free_dlistint(stack_t **stack);
+int _isdigit(char *c);
 
 #endif
