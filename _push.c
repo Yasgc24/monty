@@ -1,6 +1,6 @@
 #include "monty.h"
 
-int global_number;
+int val;
 
 /**
  * _push - pushes an element to the stack
@@ -16,22 +16,17 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	if (new == NULL)
 	{
-		fprintf(stderr, "Error: malloc failed");
+		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
 
 	new->n = global_number;
-	new->next = NULL;
+	new->next = *stack;
 	new->prev = NULL;
 
 	if (*stack)
 	{
-		(*stack)->next = new;
-		new->prev = *stack;
-		*stack = new;
+		(*stack)->prev = new;
 	}
-	else
-	{
-		*stack = new;
-	}
+	*stack = new;
 }

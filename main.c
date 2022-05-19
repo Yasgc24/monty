@@ -7,7 +7,7 @@
  * Return: 0
  */
 
-int main( int argc, char **argv)
+int main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
@@ -32,37 +32,40 @@ void read_file(char *argv)
 	FILE *fd;
 	char *line, *token =  NULL, *arguments = NULL;
 	stack_t *stack = NULL;
-	unsigned int line_number = 0, res = 0;
+	int line_number = 0, res = 0;
 	size_t buff = 0;
 
 	fd = fopen(argv, "r");
 	if (fd)
 	{
-		while(getline(&line, &buff, fd) != -1)
+		while (getline(&line, &buff, fd) != -1)
 		{
+			arguments = strtok(line, " \n\a\t\r");
+			if (arguments)
+			{
+				if (arguments[0] == '#')
+				{
+					line_number++;
+					continue;
+				}
+				token = strtok(NULL, " \n\a\t\r");
+				res = _getfunc(&stack, arguments, token, line_number);
+				if (res == 1)
+				{	fprintf(stderr, "L%d: usage: push integer\n", line_number);
+					exit(EXIT_FAILURE); }
+			}
 			line_number++;
-			arguments = strtok(line, DELIM);
-			if (arguments == NULL)
-			{
-				free(arguments);
-				continue;
-			}
-			token = strtok(NULL, DELIM);
-			res = _getfunc(&stack, arguments, token, line_number);
-			if (res == 1)
-			{
-				fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			}
-			else if (res == 2)
-				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-			exit(EXIT_FAILURE);
 		}
-		free(line);
-		free_dlistint(&stack);
-		fclose(fd);
-	}
+		if (res == 2)
+		{	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+			exit(EXIT_FAILURE);}}
+	free(line);
+	free_dlistint(&stack);
+	fclose(fd);
+}
 	else
 	{
 		fprintf(stderr, "Error: Can't open file <file>\n");
+		exit(EXIT_FAILURE);
 	}
 }

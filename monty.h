@@ -10,9 +10,7 @@
 #include <errno.h>
 #include <fcntl.h>
 
-extern int global_number;
-
-#define DELIM " \t\r\a\n"
+extern int val;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
