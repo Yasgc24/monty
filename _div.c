@@ -20,6 +20,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	else if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 	div = (*stack)->next->n / (*stack)->n;
 	(*stack)->next->n = div;
