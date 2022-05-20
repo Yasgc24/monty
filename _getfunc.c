@@ -22,6 +22,7 @@ int _getfunc(stack_t **stack, char *arguments, char *token, int line_number)
 		{"sub", _sub},
 		{"div", _div},
 		{"mul", _mul},
+		{"mod", _mod},
 		{NULL, NULL}
 	};
 
