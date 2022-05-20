@@ -1,7 +1,5 @@
 #include "monty.h"
 
-int global_number;
-
 /**
  * _swap - swaps the top two elements of the stack
  * @stack: Stack
@@ -11,15 +9,17 @@ int global_number;
 
 void _swap(stack_t **stack, unsigned int line_number)
 {
-	int i;
-	(void)line_number;
+	int i = 0;
 
 	if (*stack == NULL || (*stack)->prev == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	i = (*stack)->n;
-	(*stack)->n = (*stack)->prev->n;
-	(*stack)->prev->n = i;
+	else
+	{
+		i = (*stack)->n;
+		(*stack)->n = (*stack)->prev->n;
+		(*stack)->prev->n = i;
+	}
 }

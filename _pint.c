@@ -1,7 +1,5 @@
 #include "monty.h"
 
-int global_number;
-
 /**
  * _pint - prints the value at the top of the stack,
  * followed by a new line
